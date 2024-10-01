@@ -1,4 +1,5 @@
 import pandas as pd
+from pdf import generate_pdf
 
 df = pd.read_csv("hotels.csv")
 df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient='records')
@@ -37,6 +38,7 @@ class ReservationTicket:
         Name: {self.customer_name}
         Hotel Name: {self.hotel.name}
         """
+        generate_pdf(self.customer_name, self.hotel.name)
         return content
 
 
@@ -76,5 +78,6 @@ if hotel.available():
             print("Credit Card Authentication failed!")
     else:
         print("There was a problem with your payment!")
+    
 else:
     print("Hotel is not available.")
